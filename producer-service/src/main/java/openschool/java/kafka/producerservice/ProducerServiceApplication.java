@@ -1,9 +1,11 @@
-package java.openschool.kafka.producer_service;
+package openschool.java.kafka.producerservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class ProducerServiceApplication {
 
 	public static void main(String[] args) {

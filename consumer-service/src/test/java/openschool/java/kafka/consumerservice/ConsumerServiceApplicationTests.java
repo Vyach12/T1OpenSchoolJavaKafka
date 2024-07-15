@@ -1,4 +1,4 @@
-package java.openschool.kafka.consumer_service;
+package openschool.java.kafka.consumerservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

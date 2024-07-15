@@ -1,4 +1,4 @@
-package java.openschool.kafka.producer_service;
+package openschool.java.kafka.producerservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
