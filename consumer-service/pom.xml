@@ -12,9 +12,9 @@
 	<artifactId>consumer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>consumer-service</name>
-	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
+		<springdoc.openapi.version>2.0.2</springdoc.openapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -49,6 +49,13 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.openapi.version}</version>
 		</dependency>
 	</dependencies>
 
