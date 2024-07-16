@@ -1,25 +1,48 @@
 package openschool.java.kafka.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import openschool.java.kafka.dto.MetricTO;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import openschool.java.kafka.entity.Metric;
+import openschool.java.kafka.repository.MetricRepository;
+import openschool.java.kafka.service.MetricAnalysisService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Slf4j
+import java.util.List;
+import java.util.UUID;
+
+
 @RestController
 @RequestMapping("/metrics")
 @RequiredArgsConstructor
 public class MetricsController {
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final MetricRepository repository;
+    private final MetricAnalysisService metricAnalysisService;
 
-    @PostMapping
-    public void sendMetric(@RequestBody MetricTO metric) {
-        log.info("sending metric {}", metric);
-        kafkaTemplate.send("metrics-topic", metric);
+    @GetMapping
+    public List<Metric> getAllMetrics() {
+        return repository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Metric> getMetricById(@PathVariable UUID id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * возможность предсказания будущих значений метрик на основе линейной регрессии
+     * @param minutes
+     * @return
+     */
+    @GetMapping("/system.cpu.usage/predict")
+    public double predictCpuUsage(@RequestParam int minutes) {
+        return metricAnalysisService.predictCpuUsage(minutes);
+    }
+
+    @GetMapping("/system.cpu.usage/average")
+    public double getAverageCpuUsage(@RequestParam int minutes) {
+        return metricAnalysisService.calculateAverageCpuUsage(minutes);
     }
 }
