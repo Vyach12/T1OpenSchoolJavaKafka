@@ -1,4 +1,4 @@
-package openschool.java.kafka.consumerservice;
+package openschool.java.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

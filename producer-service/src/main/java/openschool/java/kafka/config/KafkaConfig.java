@@ -1,4 +1,4 @@
-package openschool.java.kafka.producerservice.config;
+package openschool.java.kafka.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaTopicConfig {
+public class KafkaConfig {
 
     @Bean
     public NewTopic metricTopic() {
@@ -22,8 +22,8 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public Map<String,Object> producerConfig(){
-        Map<String,Object> props=new HashMap<>();
+    public Map<String, Object> producerConfig() {
+        Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "localhost:9092");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
@@ -34,12 +34,12 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public ProducerFactory<String,String> producerFactory(){
+    public ProducerFactory<String, Object> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String,String> kafkaTemplate(){
+    public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
