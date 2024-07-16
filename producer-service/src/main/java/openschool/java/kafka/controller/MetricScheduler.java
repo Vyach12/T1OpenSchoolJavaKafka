@@ -12,14 +12,21 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 
+/**
+ * Сервис для отправки метрик системы в Apache Kafka.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MetricScheduler {
-    private final KafkaTemplate<String, Object> kafkaTemplate;
 
+    private final KafkaTemplate<String, Object> kafkaTemplate;
     private final RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * Асинхронная отправка метрик системы в Kafka каждую минуту.
+     * Сбор метрик происходит автоматически с использованием Actuator.
+     */
     @Scheduled(fixedRate = 60000)
     @Async
     public void sendActuatorMetrics() {
