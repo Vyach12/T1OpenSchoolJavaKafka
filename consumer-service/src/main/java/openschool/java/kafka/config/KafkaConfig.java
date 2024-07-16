@@ -16,6 +16,7 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConfig {
+
     @Bean
     public Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>();

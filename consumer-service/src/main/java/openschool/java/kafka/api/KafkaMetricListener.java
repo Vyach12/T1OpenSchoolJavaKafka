@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class KafkaConsumerListener {
+public class KafkaMetricListener {
 
     private final MetricRepository metricRepository;
 
